@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Puzzle Game</title>
+  <meta charset="uft-8">
+  <style>
+    body{
+	margin:0px;
+	padding:0px;
+	/*background:#D8D8D8;*/
+	/*background-image:url(Images/Gray.png);
+	/*z-index:-3;*/
+	background-color:#ddd
+	}
+    table{
+	  background:#2780c4;
+	  margin-top:120px;
+	  margin-bottom:50px;
+	  padding:30px;
+	  border-radius:10px;
+	  border:#FFFFFF groove 5px;
+	  }
+	  img{
+	  padding:10px;
+	  background:#2780c4;
+	  }
+
+    input[type=text] {
+    width: 90px;
+	height:40px;
+    background-color:#7575FF;
+    color: white;
+	font-size:24px;
+    padding: 17px;
+    border:  #FFFFFF 4px solid;
+    border-radius:10px;
+    cursor: pointer;
+	margin:5px;
+	
+	/*display:block;*/
+           }
+	input[type=button] {
+    width: 150px;
+	height:60px;
+    background-color:#2780c4;
+    color: white;
+	font-size:24px;
+    padding: 14px 20px;
+    border:#00FFFF 3px solid;
+    border-radius: 10px;
+    cursor: pointer;
+	margin:5px;
+	margin-bottom:0px;
+	display:block;
+	margin-left:80px;
+           }
+	header{
+	margin:0px;
+	background:#2780c4;;
+	width:100%;
+	height:80px;
+	color:#FFFFFF;
+	position:relative;
+	border-bottom:#FFFFFF solid 1px;
+	   
+	}
+	header h1{
+	margin:0px;
+	font-size:60px;
+	}
+	article{
+	width:100%;
+	height:5px;
+	padding:0px;
+	background:#FFFFFF;
+	}
+	aside{
+	background:#2780c4;
+	float:left;
+	margin-top:120px;
+	margin-left:70px;
+	border:#FFFFFF solid 3px;
+	padding:10px;
+	margin-bottom:90px;
+	
+	border-radius:10px;
+	}
+	footer{
+    background:#2780c4;;
+	color:#DDD;
+	padding-left:50px;
+	padding-top:15px;
+	font-size:20px;
+	text-align:center;
+	clear:both;
+	height:120px;
+    }
+    span{
+	font-size:1.5rem;
+	color:#CCCC00;
+	}
+	#date{
+	color:#000;
+	}
+	p{
+	font-size:1.5rem;
+	color:#FFFFFF;
+	}
+  </style>  
+
+ <script language="javascript">
+ var cp=0;
+   var t=new Array();
+   var ti=new Array("0.jpg",
+					"1.jpg?",
+					"2.jpg",
+					"3.jpg","4.jpg",       "5.png",                 "6.jpg","7.jpg","8.png","9.png",    "10.jpg","11.png","12.jpg","13.png","14.png","15.png"
+                    );
+	 var d;
+     function rempli(){
+	  rt();
+       for(f=0;f<16;f++){
+	   do{
+       a=Math.floor(Math.random()*16);
+	   r=vrf(a);
+	   }while(r==true);
+	   t[f]=a;
+     } }
+     function afficher(){
+         for(i=0;i<16;i++){
+       alert(t[i]);
+         } }
+	 function vrf(v){
+	   trouve=false;
+	   i=0;
+	   while(i<16 &&trouve==false){
+	     if(t[i]==parseInt(v))   trouve=true;
+		  else i++;
+	 }
+	return trouve;
+	 }
+	 function test(){
+	 var d1=document.getElementById("xt");
+     var d2=document.getElementById("tx");
+	 var y=vrf(d1.value);
+	 if(y==true)
+	  d2.value="éxist";
+	  else d2.value="n'existe pas";
+     }
+	 function charger(){
+	 // rempli();
+	  for(c=0;c<document.images.length;c++){
+	   document.images[c].src=ti[t[c]];
+	   }
+	 }
+	 function rt(){
+	 for(i=0;i<16;i++){
+	  t[i]=-1;
+	  } }
+	  function aff(m){
+	  //var d=t.indexOf(t[m]);
+	   var s=t.indexOf(0);
+	  //alert(m);
+	  if(m==s+4) {//alert("Au dessus");
+	  x=t[s];
+	  t[s]=t[m];
+	  t[m]=x;
+	  charger();
+	  cp++;
+	  document.getElementById("ct").value=cp;
+	  odr();
+	  }
+	  else  if(m==s+1 && s%4!=0){ //alert("A gauche");
+	  x=t[s];
+	  t[s]=t[m];
+	  t[m]=x;
+	  charger();
+	  cp++;
+	  document.getElementById("ct").value=cp;
+	 odr();
+	// alert("nb"+cp)
+	  }
+	  else if(m==s-4){ //alert("Au Haut");
+	   x=t[s];
+	  t[s]=t[m];
+	  t[m]=x;
+	  charger();
+	  cp++;
+	  document.getElementById("ct").value=cp;
+	  odr();
+	  }
+	  else if (m==s-1 && s%4!=0) {//alert("A droit");
+	   x=t[s];
+	  t[s]=t[m];
+	  t[m]=x;
+	  charger();
+	  cp++;
+	  document.getElementById("ct").value=cp;
+	 odr();
+	  }
+	 // else alert("Loin");
+	  }
+	  /*function Changer(n){
+	   var s=t.indexOf(0);
+	   alert(n);
+	   l=s+4;
+	   var x;
+	   if(n==l){
+	   x=s.src;
+	   s=l.src;
+	   l=x.src;
+	   }
+	   
+	  }
+	/* function aff(m){
+	 alert(t[m]);
+	 }*/
+	//Index of Image 0
+	 function odr(){
+	 var s=order();
+	 if(s==true) alert("You win , this's the number of trying"+cp);
+	 
+	}
+	 function indexi (){
+	 var s=t.indexOf(0);
+	 var d=t.indexOf(s+4);
+	 alert(d);
+	 }
+	 /*function indexImg(){
+	 for(i=0;i<16;i++){
+	 var d=t.indexOf(t[i]);
+	 }
+	 alert(d);
+	 }*/
+	 function charger1(){
+	  rempli();
+	  charger();
+	 } 
+	 function order(){
+	var x =0;
+	for(i=0;i<t.length;i++){
+	 if(t[i-1]>t[i]) return false;
+	 }
+	 return true;
+	}
+	function felc(){
+	alert("nb"+cp);
+	}
+ </script>
+ </head>
+ <body onLoad="charger1()">
+  <header>
+	<h1 align="center"> Puzzle Game</h1>
+  </header>
+  <article>
+  </article>
+  <aside>
+   <p align="center">Number of attempts</p>
+   <center><input type="text" id="ct"  /></center>
+   <!--<input type="button" onClick="felc()" value="Finished"/>-->
+  </aside>
+   <!--<aside>
+    <input type="text" placeholder="write" id="xt">
+	<input type="text" id="tx">
+    <input type="button" onclick="rempli()" value="Remplir"/>
+    <input type="button" onclick="afficher()" value="Afficher"/>
+	<input type="button" onClick="test()" value="Test"/>
+	<input type="button" onClick="charger()" value="Charger"/>
+	<input type="button" onclick="rt()" value="reinitialiser"/>
+	<input type="button" onClick="indexi()" value="Index"/>
+  </aside>  -->
+  <table align="center"  width="400" height="400" cellspacing="0" cellpadding="0">
+	<tr>
+	  <td><a href="javascript:aff(0)"><img id="img0" src="0.jpg" width="60" height="60"/></a></td>
+	  <td>
+		  <a href="javascript:aff(1)"><img src="1.jpg" width="60" height="60"/></a>
+		</td>
+	  <td><a href="javascript:aff(2)"><img src="2.jpg" width="60" height="60"/></a></td>
+	  <td><a href="javascript:aff(3)"><img src="3.jpg" width="60" height="60"/></a></td>
+	</tr>
+	<tr>
+	  <td><a href="javascript:aff(4)"><img src="4.jpg" width="60" height="60"/></a></td>
+	  <td><a href="javascript:aff(5)"><img src="5.png" width="60" height="60"/></a></td>
+	  <td><a href="javascript:aff(6)"><img src="6.jpg" width="60" height="60"/></a></td>
+	  <td><a href="javascript:aff(7)"><img src="7.jpg" width="60" height="60"/></a></td>
+	</tr>
+	<tr>
+	  <td><a href="javascript:aff(8)"><img src="8.png" width="60" height="60"/></a></td>
+	  <td><a href="javascript:aff(9)"><img src="9.png" width="60" height="60"/></a></td>
+	  <td><a href="javascript:aff(10)"><img src="10.jpg" width="60" height="60"/></a></td>
+	  <td><a href="javascript:aff(11)"><img src="11.png" width="60" height="60"/></a></td>
+	</tr>
+	 <tr>
+      <td><a href="javascript:aff(12)"><img  width="60" height="60" src="12.jpg"/>
+	  </a></td>
+      <td><a href="javascript:aff(13)"><img  width="60" height="60" src="13.png"/>
+	  </a></td>
+      <td><a href="javascript:aff(14)"><img  width="60" height="60" src="14.png"/>
+	  </a></td>
+      <td><a href="javascript:aff(15)"><img  width="60" height="60" src="15.png"/></a></td>
+    </tr>  
+  </table>
+  <footer>
+  <p align="left">Designed by <span>Mohamed Bekkali</span><span id="date"> 25/11/2018</span>
+    <center>  Copyright 2018 &copy; All Right Reserved</center></p>
+  </footer>
+ </body>
+</html>
